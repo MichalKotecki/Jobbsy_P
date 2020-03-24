@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Jobbsy.Models.Technology>
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Search</h1>
+<h3>Choose up to 3 technologies to search for: </h3>
+
+@{ 
+    List<SelectListItem> technologyList =  Model.Select(tech => new SelectListItem { Value = tech.technologyID.ToString(), Text = tech.name }).ToList<SelectListItem>();
+
+}
+
+@{
+    List<SelectListItem> Modes = new List<SelectListItem>();
+    Modes.Add(new SelectListItem { Value = "0", Text = "All" });
+    Modes.Add(new SelectListItem { Value = "1", Text = "Any" });
+}
+
+<form asp-controller="Companies" asp-action="CompanyListForSearchResult" method="post">
+    @* <select asp-for="technology1" asp-items="Model.S">Technology1</select>*@
+    Search Mode:
+    <select class="form-control btn-secondary" name="mode" asp-items="Modes">Mode</select>
+    Technology 1:
+    <select class="form-control btn-success" name="tech1" asp-items="technologyList">Technology 1</select>
+    Technology 2:
+    <select class="form-control btn-success" name="tech2" asp-items="technologyList">Technology 2</select>
+    Technology 3:
+    <select class="form-control btn-success" name="tech3" asp-items="technologyList">Technology 3</select>
+    <br />
+    <a asp-controller="Companies" asp-action="CompanyListForUser"><button type="submit" class="btn btn-success">GO</button></a>
+</form>

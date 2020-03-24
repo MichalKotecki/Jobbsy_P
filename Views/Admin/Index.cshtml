@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "AdminConsole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Welcome to AdminConsole!</h1>
+<h2>Manage the website from here.</h2>
+
+<a asp-controller="Companies" asp-action="Index"><button type="button" class="btn btn-success">MANAGE COMPANIES</button></a>
+<a asp-controller="Technologies" asp-action="Index"><button type="button" class="btn btn-success">MANAGE TECHNOLOGIES</button></a>
+<a asp-controller="Photos" asp-action="Index"><button type="button" class="btn btn-success">MANAGE PHOTOS</button></a>
+<a asp-controller="Admin" asp-action="AddRolesToUsers"><button type="button" class="btn btn-success">ADD ROLES TO USERS</button></a>
+
+

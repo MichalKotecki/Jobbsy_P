@@ -1,0 +1,29 @@
+﻿@model int
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Category</h1>
+<h3>Category by location:</h3>
+
+
+@{
+    List<SelectListItem> LocationY = new List<SelectListItem>();
+    LocationY.Add(new SelectListItem { Value = "SOUTH", Text = "South" });
+    LocationY.Add(new SelectListItem { Value = "NORTH", Text = "North" });
+
+    List<SelectListItem> LocationX = new List<SelectListItem>();
+    LocationX.Add(new SelectListItem { Value = "EAST", Text = "East" });
+    LocationX.Add(new SelectListItem { Value = "WEST", Text = "West" });
+}
+
+<form asp-controller="Companies" asp-action="CategorySearchResult" method="post">
+    Location X:
+    <select class="form-control btn-success" name="LocationX" asp-items="LocationX">LocationX</select>
+    Location Y:
+    <select class="form-control btn-success" name="LocationY" asp-items="LocationY">LocationY</select>
+    <br />
+    <a asp-controller="Companies" asp-action="CategorySearchResult"><button type="submit" class="btn btn-success">GO</button></a>
+</form>

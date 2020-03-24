@@ -1,0 +1,33 @@
+﻿@model Tuple<List<Microsoft.AspNetCore.Identity.IdentityUser>, List<String>>
+
+
+@{
+    ViewData["Title"] = "AdminConsole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Give Users Roles</h1>
+
+
+@{
+    List<String> rolesList = Model.Item2;
+    List<String> userNamesList = Model.Item1.Select(user => user.Email).ToList();
+    List<SelectListItem> rolesListSelector = rolesList.Select( role => new SelectListItem { Value = role, Text = role }).ToList<SelectListItem>();
+    List<SelectListItem> userNamesListSelector = userNamesList.Select( role => new SelectListItem { Value = role, Text = role }).ToList<SelectListItem>();
+
+}
+
+@{
+    List<SelectListItem> Modes = new List<SelectListItem>();
+    Modes.Add(new SelectListItem { Value = "0", Text = "All" });
+    Modes.Add(new SelectListItem { Value = "1", Text = "Any" });
+}
+
+<form asp-controller="Admin" asp-action="AddRoleFinish" method="post">
+    User:
+    <select class="form-control btn-success" name="username" asp-items="userNamesListSelector">User</select>
+    Role:
+    <select class="form-control btn-success" name="role" asp-items="rolesListSelector">Role</select>
+    <br />
+    <a asp-controller="Admin" asp-action="AddRoleFinish"><button type="submit" class="btn btn-success">ADD ROLE</button></a>
+</form>

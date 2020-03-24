@@ -1,0 +1,37 @@
+﻿@model X.PagedList.IPagedList<Jobbsy.Models.Company>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Common;
+@using X.PagedList;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Companies</h1>
+
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.companyID"> @item.companyName</a>
+                </td>
+                <td>
+                    <a> @item.description </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+
+@Html.PagedListPager(Model, page => Url.Action("CompanyListForUser", new { page = page }),
+    new PagedListRenderOptions
+    {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+})
+

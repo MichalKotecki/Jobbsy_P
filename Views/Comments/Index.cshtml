@@ -1,0 +1,52 @@
+﻿@model Jobbsy.Models.Company
+
+@{
+    ViewData["Title"] = "Comments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Comments for @Model.companyName</h1>
+
+<p>
+    <a asp-action="Create">ADD COMMENT</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Rate
+            </th>
+            <th>
+                Short description
+            </th>
+            <th>
+                Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CommentCollection) {
+        <tr>
+            <td>
+                @{ string stars = ""; }
+                    @for (int i = 0; i < item.rate; i++)
+                    {
+                        stars += "&starf;";
+                    }
+                    @for (int i = 0; i < 5 - item.rate; i++)
+                    {
+                        stars += "&star;";
+                    }
+                @Html.Raw(@stars)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
